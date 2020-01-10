@@ -1,0 +1,55 @@
+#include<iostream>
+#include<vector>
+#include<cstdio>
+#include<algorithm>
+using namespace std;
+
+int main(int argc, char** argv)
+{
+
+	freopen("input.txt", "r", stdin);
+
+	for (int i = 0; i < 10; i++) {
+		int test_case;
+		int T;
+		int temp;
+		int change;
+		vector<int> v;
+
+		cin >> T;
+		/*
+		   여러 개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
+		*/
+		for (test_case = 0; test_case < 100; test_case++)
+		{
+			cin >> temp;
+			v.push_back(temp);
+		}
+		sort(v.begin(), v.end());
+
+		while (T-- && v[99] - v[0] != 1) {
+
+			v[0]++;
+			v[99]--;
+
+			temp = 0;
+			while (v[temp] > v[temp + 1]) {
+				change = v[temp];
+				v[temp] = v[temp + 1];
+				v[temp + 1] = change;
+				temp++;
+			}
+			temp = 99;
+			while (v[temp] < v[temp - 1]) {
+				change = v[temp];
+				v[temp] = v[temp - 1];
+				v[temp - 1] = change;
+				temp--;
+			}
+
+		}
+
+		cout <<'#' << i+1<<' '<< v[99] - v[0] << endl;
+	}
+	return 0;
+}
